@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Kata20170724_WhichAreIn
 {
@@ -59,6 +56,26 @@ namespace Kata20170724_WhichAreIn
             AssertWhichAreInShouldBe(a1, a2, expected);
         }
 
+        [TestMethod]
+        public void Input_s1_tarp_mice_bull_live_s2_lively_alive_harp_sharp_armstrong_Should_return_empty()
+        {
+            var a1 = new[] { "tarp", "mice", "bull" };
+            var a2 = new[] { "lively", "alive", "harp", "sharp", "armstrong" };
+            var expected = new string[] { };
+
+            AssertWhichAreInShouldBe(a1, a2, expected);
+        }
+
+        [TestMethod]
+        public void Input_s1_live_arp_strong_live_s2_lively_alive_harp_sharp_armstrong_Should_return_arp_live_strong()
+        {
+            var a1 = new[] { "live", "arp", "strong" };
+            var a2 = new[] { "lively", "alive", "harp", "sharp", "armstrong" };
+            var expected = new[] { "arp", "live", "strong" };
+
+            AssertWhichAreInShouldBe(a1, a2, expected);
+        }
+
         private static void AssertWhichAreInShouldBe(string[] a1, string[] a2, string[] expected)
         {
             var whichAreIn = new WhichAreIn();
@@ -71,7 +88,7 @@ namespace Kata20170724_WhichAreIn
     {
         public string[] inArray(string[] array1, string[] array2)
         {
-            return array1.Where(a => array2.Any(a2 => a2.Contains(a))).ToArray();
+            return array1.Where(a => array2.Any(a2 => a2.Contains(a))).Distinct().OrderBy(a => a).ToArray();
         }
     }
 }
